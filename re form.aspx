@@ -28,6 +28,10 @@
         .auto-style6 {
             width: 171px;
         }
+        .auto-style7 {
+            width: 249px;
+            height: 118px;
+        }
     </style>
 </head>
 <body>
@@ -130,6 +134,14 @@
                 <td class="auto-style4" colspan="2">
                     <asp:GridView ID="gvdepa" runat="server" OnSelectedIndexChanged="gvdepa_SelectedIndexChanged">
                     </asp:GridView>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style7" colspan="2">
+                    <asp:DropDownList ID="ddlDepa" runat="server" AutoPostBack="True" Height="38px" OnSelectedIndexChanged="ddlDepa_SelectedIndexChanged" Width="161px">
+                    </asp:DropDownList>
+                    <asp:DropDownList ID="ddlCou" runat="server" AutoPostBack="True" Height="42px" OnSelectedIndexChanged="ddlCou_SelectedIndexChanged" Width="154px">
+                    </asp:DropDownList>
                 </td>
             </tr>
         </table>

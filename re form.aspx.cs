@@ -44,6 +44,7 @@ namespace A_045
             {
                 fnBindstate(); 
                 this.Bindgrid();
+                this.Blinddb();
             }
         }
 
@@ -185,5 +186,48 @@ namespace A_045
 
         }
 
+        public void Blinddb()
+        {
+            SqlConnection conn = new SqlConnection (strcon);
+            conn.Open ();
+            string query = "select * from depa_1";
+            SqlDataAdapter adpt = new SqlDataAdapter(query,conn);
+            DataTable dt = new DataTable();
+            adpt.Fill(dt);
+            ddlDepa.DataSource = dt;
+            ddlDepa.DataBind();
+            ddlDepa.DataTextField = "depa_name";
+            ddlDepa.DataTextField = "depa_id";
+            ddlDepa.DataBind();
+            conn.Close();
+
+
+
+        }
+
+
+
+
+        protected void ddlDepa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(strcon);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("select * from cou_1 where depa_id=@depa_id", conn);
+
+            cmd.Parameters.AddWithValue("depa_id",ddlDepa.SelectedValue);
+
+           
+         ddlCou.DataSource = cmd.ExecuteReader();
+         ddlCou.DataTextField = "course_name";
+         ddlCou.DataTextField = "cousre_id";
+         ddlCou.DataBind();
+
+        }
+
+        protected void ddlCou_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
