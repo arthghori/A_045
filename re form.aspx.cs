@@ -42,9 +42,9 @@ namespace A_045
             fnconnctions();
             if (!Page.IsPostBack)
             {
-                fnBindstate(); 
-                //this.Bindgrid();
-                //this.Blinddb();
+                fnBindstate();
+                this.Bindgrid();
+                this.Blinddb();
             }
         }
 
