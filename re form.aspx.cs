@@ -15,10 +15,11 @@ namespace A_045
     public partial class re_form : System.Web.UI.Page
     {
         SqlConnection conn;
+        string strcon;
         protected void fnconnctions()
         {
 
-            string strcon = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+             strcon = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
 
             conn = new SqlConnection(strcon);
 
@@ -41,7 +42,8 @@ namespace A_045
             fnconnctions();
             if (!Page.IsPostBack)
             {
-                fnBindstate();  
+                fnBindstate(); 
+                this.Bindgrid();
             }
         }
 
@@ -165,5 +167,23 @@ namespace A_045
         {
 
         }
+
+        public void Bindgrid()
+        {
+            SqlConnection conn = new SqlConnection(strcon);
+            string query = "select * from depa_1";
+
+            conn.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(query,conn);
+            DataSet ds = new DataSet();
+            sda.Fill(ds);
+
+            gvdepa.DataSource = ds;
+            gvdepa.DataBind();
+            conn.Close();
+             
+
+        }
+
     }
 }
