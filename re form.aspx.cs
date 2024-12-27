@@ -194,11 +194,11 @@ namespace A_045
             SqlDataAdapter adpt = new SqlDataAdapter(query,conn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
-            ddlDepa.DataSource = dt;
-            ddlDepa.DataBind();
-            ddlDepa.DataTextField = "depa_name";
-            ddlDepa.DataTextField = "depa_id";
-            ddlDepa.DataBind();
+            ddlDep.DataSource = dt;
+            ddlDep.DataBind();
+            ddlDep.DataTextField = "depa_name";
+            ddlDep.DataTextField = "depa_id";
+            ddlDep.DataBind();
             conn.Close(); 
 
 
@@ -215,13 +215,13 @@ namespace A_045
 
             SqlCommand cmd = new SqlCommand("select * from cou_1 where depa_id=@depa_id", conn);
 
-            cmd.Parameters.AddWithValue("depa_id",ddlDepa.SelectedValue);
+            cmd.Parameters.AddWithValue("depa_id",ddlDep.SelectedValue);
 
            
-         ddlCou.DataSource = cmd.ExecuteReader();
-         ddlCou.DataTextField = "course_name";
-         ddlCou.DataTextField = "cousre_id";
-         ddlCou.DataBind();
+         ddlCour.DataSource = cmd.ExecuteReader();
+         ddlCour.DataTextField = "course_name";
+         ddlCour.DataTextField = "cousre_id";
+         ddlCour.DataBind();
 
         }
 
