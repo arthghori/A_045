@@ -43,8 +43,8 @@ namespace A_045
             if (!Page.IsPostBack)
             {
                 fnBindstate(); 
-                this.Bindgrid();
-                this.Blinddb();
+                //this.Bindgrid();
+                //this.Blinddb();
             }
         }
 
