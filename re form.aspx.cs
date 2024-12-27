@@ -227,7 +227,6 @@ namespace A_045
 
         protected void ddlCou_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
     }
 }
