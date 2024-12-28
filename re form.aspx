@@ -138,9 +138,9 @@
             </tr>
             <tr>
                 <td class="auto-style7" colspan="2">
-                    <asp:DropDownList ID="ddlDepa" runat="server" AutoPostBack="True" Height="38px" OnSelectedIndexChanged="ddlDepa_SelectedIndexChanged" Width="161px">
+                    <asp:DropDownList ID="ddlDep" runat="server" AutoPostBack="True" Height="38px" OnSelectedIndexChanged="ddlDepa_SelectedIndexChanged" Width="161px">
                     </asp:DropDownList>
-                    <asp:DropDownList ID="ddlCou" runat="server" AutoPostBack="True" Height="42px" OnSelectedIndexChanged="ddlCou_SelectedIndexChanged" Width="154px">
+                    <asp:DropDownList ID="ddlCour" runat="server" AutoPostBack="True" Height="42px" OnSelectedIndexChanged="ddlCou_SelectedIndexChanged" Width="154px">
                     </asp:DropDownList>
                 </td>
             </tr>
