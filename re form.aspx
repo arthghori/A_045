@@ -121,7 +121,7 @@
             <tr>
                 <td class="auto-style3" colspan="2">
                     <asp:Button ID="btnSave" runat="server" Height="42px" OnClick="btnSave_Click" Text="Save" Width="126px" />
-                    <asp:Button ID="btnReset" runat="server" Height="42px" OnClick="btnReset_Click" Text="Reset" Width="126px" />
+                    <asp:Button ID="btnReset" runat="server" Height="39px" OnClick="btnReset_Click" Text="Reset" Width="108px" />
                 </td>
             </tr>
             <tr>
