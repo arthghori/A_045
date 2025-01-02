@@ -172,7 +172,7 @@ namespace A_045
         public void Bindgrid()
         {
             SqlConnection conn = new SqlConnection(strcon);
-            string query = "select * from depa_1";
+            string query = "select * from cou_1";
 
             conn.Open();
             SqlDataAdapter sda = new SqlDataAdapter(query,conn);
@@ -190,13 +190,13 @@ namespace A_045
         {
             SqlConnection conn = new SqlConnection (strcon);
             conn.Open ();
-            string query = "select * from depa_1";
+            string query = "select * from cou_1";
             SqlDataAdapter adpt = new SqlDataAdapter(query,conn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
             ddlDep.DataSource = dt;
             ddlDep.DataBind();
-            ddlDep.DataTextField = "depa_name";
+            ddlDep.DataTextField = "course_name";
             ddlDep.DataTextField = "depa_id";
             ddlDep.DataBind();
             conn.Close(); 
@@ -220,13 +220,39 @@ namespace A_045
            
          ddlCour.DataSource = cmd.ExecuteReader();
          ddlCour.DataTextField = "course_name";
-         ddlCour.DataTextField = "cousre_id";
+        //ddlCour.DataTextField = "cousre_id";
          ddlCour.DataBind();
 
         }
 
         protected void ddlCou_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        protected void btnInsert_Click(object sender, EventArgs e)
+        {
+            string c_name = txtCname.Text;
+            string c_depa = ddlDname.SelectedValue;
+            string query = "INSERT INTO cou_1 VALUES(@course_name,@depa_id)";
+            SqlConnection conn = new SqlConnection(strcon);
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            cmd.Parameters.AddWithValue("@course_name",c_name);
+
+            cmd.Parameters.AddWithValue("@depa_id",c_depa);
+
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            Bindgrid();
+            
+             
+
+        }
+
+        protected void ddlDname_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

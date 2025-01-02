@@ -32,6 +32,10 @@
             width: 249px;
             height: 118px;
         }
+        .auto-style8 {
+            width: 249px;
+            height: 71px;
+        }
     </style>
 </head>
 <body>
@@ -132,7 +136,7 @@
             </tr>
             <tr>
                 <td class="auto-style4" colspan="2">
-                    <asp:GridView ID="gvdepa" runat="server" OnSelectedIndexChanged="gvdepa_SelectedIndexChanged">
+                    <asp:GridView ID="gvdepa" runat="server" OnSelectedIndexChanged="gvdepa_SelectedIndexChanged" AutoGenerateEditButton="True" AutoGenerateSelectButton="True">
                     </asp:GridView>
                 </td>
             </tr>
@@ -142,6 +146,22 @@
                     </asp:DropDownList>
                     <asp:DropDownList ID="ddlCour" runat="server" AutoPostBack="True" Height="42px" OnSelectedIndexChanged="ddlCou_SelectedIndexChanged" Width="154px">
                     </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style8" colspan="2">
+                    Course name: <asp:TextBox ID="txtCname" runat="server"></asp:TextBox>
+                    <br />
+                    <br />
+                    depa name :<br />
+                    <asp:DropDownList ID="ddlDname" runat="server" Width="158px" OnSelectedIndexChanged="ddlDname_SelectedIndexChanged">
+                        <asp:ListItem>DD</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style8" colspan="2">
+                    <asp:Button ID="btnInsert" runat="server" OnClick="btnInsert_Click" Text="Insert" Width="112px" />
                 </td>
             </tr>
         </table>
