@@ -182,7 +182,7 @@ namespace A_045
              
 
         }
-
+        // ddl depa and cou for drop down
         public void Blinddb()
         {
             SqlConnection conn = new SqlConnection (strcon);
@@ -201,8 +201,6 @@ namespace A_045
 
 
         }
-
-
 
 
         protected void ddlDepa_SelectedIndexChanged(object sender, EventArgs e)
@@ -226,11 +224,13 @@ namespace A_045
         {
         }
 
+
+        // insert mate 
         protected void btnInsert_Click(object sender, EventArgs e)
         {
             string c_name = txtCname.Text;
             string c_depa = ddlDname.SelectedValue;
-            string query = "INSERT INTO cou_1 VALUES(@course_name,@depa_id)";
+            string query = "INSERT INTO cou_1 VALUES(@course_name,@depa_name)";
             SqlConnection conn = new SqlConnection(strcon);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -243,9 +243,8 @@ namespace A_045
             conn.Close();
             Bindgrid();
             
-             
-
         }
+
 
         public void Blinddb1()
         {
