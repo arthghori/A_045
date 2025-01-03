@@ -230,7 +230,7 @@ namespace A_045
         {
             string c_name = txtCname.Text;
             string c_depa = ddlDname.SelectedValue;
-            string query = "INSERT INTO cou_1 VALUES(@course_name,@depa_name)";
+            string query = "INSERT INTO cou_1 VALUES(@course_name,@depa_id)";
             SqlConnection conn = new SqlConnection(strcon);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -258,10 +258,25 @@ namespace A_045
             ddlDname.DataSource = dt;
             ddlDname.DataBind();
             ddlDname.DataTextField = "depa_name";
-            ddlDname.DataTextField = "depa_id";
+         //   ddlDname.DataTextField = "depa_id";
             ddlDname.DataBind();
             conn.Close();
 
+        }
+        protected void ddlDname_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(strcon);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("select * from cou_1 where depa_id=@depa_id", conn);
+
+            cmd.Parameters.AddWithValue("depa_name", ddlDname.SelectedValue);
+
+
+            ddlDname.DataSource = cmd.ExecuteReader();
+            ddlDname.DataTextField = "depa_name";
+            //  ddlDname.DataTextField = "cousre_id";
+            ddlDname.DataBind();
         }
 
         protected void gvdepa_SelectedIndexChanged(object sender, EventArgs e)
@@ -279,20 +294,6 @@ namespace A_045
         }
 
 
-        protected void ddlDname_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SqlConnection conn = new SqlConnection(strcon);
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand("select * from cou_1 where depa_id=@depa_id", conn);
-
-            cmd.Parameters.AddWithValue("depa_id", ddlDep.SelectedValue);
-
-
-            ddlCour.DataSource = cmd.ExecuteReader();
-            ddlCour.DataTextField = "depa_name";
-            ddlCour.DataTextField = "cousre_id";
-            ddlCour.DataBind();
-        }
+      
     }
 }
