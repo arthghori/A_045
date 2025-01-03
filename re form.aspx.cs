@@ -45,6 +45,7 @@ namespace A_045
                 fnBindstate(); 
                 this.Bindgrid();
                 this.Blinddb();
+                this.Blinddb1();
             }
         }
 
@@ -164,10 +165,6 @@ namespace A_045
             fnBindcity();
         }
 
-        protected void gvdepa_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         public void Bindgrid()
         {
@@ -233,13 +230,13 @@ namespace A_045
         {
             string c_name = txtCname.Text;
             string c_depa = ddlDname.SelectedValue;
-            string query = "INSERT INTO cou_1 VALUES(@course_name,@depa_id)";
+            string query = "INSERT INTO cou_1 VALUES(@course_name,@depa_name)";
             SqlConnection conn = new SqlConnection(strcon);
             SqlCommand cmd = new SqlCommand(query, conn);
 
             cmd.Parameters.AddWithValue("@course_name",c_name);
 
-            cmd.Parameters.AddWithValue("@depa_id",c_depa);
+            cmd.Parameters.AddWithValue("@depa_name",c_depa);
 
             conn.Open();
             cmd.ExecuteNonQuery();
@@ -250,9 +247,52 @@ namespace A_045
 
         }
 
+        public void Blinddb1()
+        {
+            SqlConnection conn = new SqlConnection(strcon);
+            conn.Open();
+            string query = "select * from depa_1";
+            SqlDataAdapter adpt = new SqlDataAdapter(query, conn);
+            DataTable dt = new DataTable();
+            adpt.Fill(dt);
+            ddlDname.DataSource = dt;
+            ddlDname.DataBind();
+            ddlDname.DataTextField = "depa_name";
+            ddlDname.DataTextField = "depa_id";
+            ddlDname.DataBind();
+            conn.Close();
+
+        }
+
+        protected void gvdepa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = gvdepa.SelectedRow;
+            txtCname.Text = row.Cells[2].Text;
+            for (int i = 0; i < ddlDname.Items.Count; i++)
+            {
+                if (ddlDname.Items[i].Text == row.Cells[3].Text)
+                {
+                    ddlDname.SelectedIndex = i;
+                }
+
+            }
+        }
+
+
         protected void ddlDname_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SqlConnection conn = new SqlConnection(strcon);
+            conn.Open();
 
+            SqlCommand cmd = new SqlCommand("select * from cou_1 where depa_id=@depa_id", conn);
+
+            cmd.Parameters.AddWithValue("depa_id", ddlDep.SelectedValue);
+
+
+            ddlCour.DataSource = cmd.ExecuteReader();
+            ddlCour.DataTextField = "depa_name";
+            ddlCour.DataTextField = "cousre_id";
+            ddlCour.DataBind();
         }
     }
 }
