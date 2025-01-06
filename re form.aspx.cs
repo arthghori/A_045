@@ -166,6 +166,7 @@ namespace A_045
         }
 
 
+        //grid view mate che 
         public void Bindgrid()
         {
             SqlConnection conn = new SqlConnection(strcon);
@@ -245,7 +246,7 @@ namespace A_045
             
         }
 
-
+        //insert mate je dropdown che te mate 
         public void Blinddb1()
         {
             SqlConnection conn = new SqlConnection(strcon);
