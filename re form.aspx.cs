@@ -214,7 +214,7 @@ namespace A_045
         public void Bindgrid()
         {
             SqlConnection conn = new SqlConnection(strcon);
-            string query = "select c.course_name,d.depa_name from cou_1 c, depa_1 d where c.depa_id=d.depa_id";
+            string query = "select c.course_name,d.depa_name from cou_1 c, depa_1 d where c.depa_id= d.depa_id";
 
             conn.Open();
             SqlDataAdapter sda = new SqlDataAdapter(query, conn);
