@@ -36,6 +36,10 @@
             width: 249px;
             height: 71px;
         }
+        .auto-style9 {
+            width: 249px;
+            height: 107px;
+        }
     </style>
 </head>
 <body>
@@ -149,13 +153,14 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style8" colspan="2">
+                <td class="auto-style9" colspan="2">
                     Course name: <asp:TextBox ID="txtCname" runat="server" OnTextChanged="txtCname_TextChanged"></asp:TextBox>
                     <br />
                     <br />
-                    depa name :<br />
-                    <asp:DropDownList ID="ddlDname" runat="server" Width="158px" OnSelectedIndexChanged="ddlDname_SelectedIndexChanged" AutoPostBack="True">
+                    depa name:
+                    <asp:DropDownList ID="ddlDname" runat="server" Width="172px" OnSelectedIndexChanged="ddlDname_SelectedIndexChanged" AutoPostBack="True">
                     </asp:DropDownList>
+                    <br />
                 </td>
             </tr>
             <tr>

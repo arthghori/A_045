@@ -27,13 +27,13 @@ namespace A_045
             {
 
                 conn.Open();
-                Response.Write("succesfull");
+                Response.Write("s");
 
             }
             else
             {
 
-                Response.Write("false");
+                Response.Write("f");
             }
 
         }
@@ -227,27 +227,9 @@ namespace A_045
 
 
         }
-        // insert mate 
-        protected void btnInsert_Click(object sender, EventArgs e)
-        {
-            string c_name = txtCname.Text;
-            string c_depa = ddlDname.SelectedValue.ToString() ;
-            string query = "INSERT INTO cou_1 VALUES(@course_name,@depa_name)";
-            SqlConnection conn = new SqlConnection(strcon);
-            SqlCommand cmd = new SqlCommand(query, conn);
-
-            cmd.Parameters.AddWithValue("@course_name",c_name);
-
-            cmd.Parameters.AddWithValue("@depa_name",c_depa);
-
-            conn.Open();
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            Bindgrid();
-            
-        }
 
         //insert mate je dropdown che te mate 
+
         public void Blinddb1()
         {
             SqlConnection conn = new SqlConnection(strcon);
@@ -259,11 +241,35 @@ namespace A_045
             ddlDname.DataSource = dt;
             ddlDname.DataBind();
             ddlDname.DataTextField = "depa_name";
-          //  ddlDname.DataTextField = "depa_id";
+            ddlDname.DataValueField = "depa_id";
             ddlDname.DataBind();
             conn.Close();
 
         }
+        // insert mate 
+        protected void btnInsert_Click(object sender, EventArgs e)
+        {
+            string c_name = txtCname.Text;
+            string c_depa = ddlDname.SelectedValue.ToString() ;
+           
+            string query = "insert into cou_1 values(@course_name,@depa_name)";
+
+            fnconnctions();
+            SqlCommand cmd = new SqlCommand(query,conn);
+            cmd.Parameters.AddWithValue("@course_name",c_name);
+            cmd.Parameters.AddWithValue("@depa_name", c_depa);
+
+
+
+
+            fnconnctions();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            Bindgrid();
+            
+        }
+
+      
         protected void ddlDname_SelectedIndexChanged(object sender, EventArgs e)
         {
            
