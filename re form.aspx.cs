@@ -166,23 +166,7 @@ namespace A_045
         }
 
 
-        //grid view mate che 
-        public void Bindgrid()
-        {
-            SqlConnection conn = new SqlConnection(strcon);
-            string query = "select * from cou_1";
-
-            conn.Open();
-            SqlDataAdapter sda = new SqlDataAdapter(query,conn);
-            DataSet ds = new DataSet();
-            sda.Fill(ds);
-
-            gvdepa.DataSource = ds;
-            gvdepa.DataBind();
-            conn.Close();
-             
-
-        }
+      
         // ddl depa and cou for drop down
         public void Blinddb()
         {
@@ -226,11 +210,28 @@ namespace A_045
         }
 
 
+        //grid view mate che main grid view to display depaname and coursename 
+        public void Bindgrid()
+        {
+            SqlConnection conn = new SqlConnection(strcon);
+            string query = "select c.course_name,d.depa_name from cou_1 c, depa_1 d where c.depa_id=d.depa_id";
+
+            conn.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(query, conn);
+            DataSet ds = new DataSet();
+            sda.Fill(ds);
+
+            gvdepa.DataSource = ds;
+            gvdepa.DataBind();
+            conn.Close();
+
+
+        }
         // insert mate 
         protected void btnInsert_Click(object sender, EventArgs e)
         {
             string c_name = txtCname.Text;
-            string c_depa = ddlDname.SelectedValue;
+            string c_depa = ddlDname.SelectedValue.ToString() ;
             string query = "INSERT INTO cou_1 VALUES(@course_name,@depa_name)";
             SqlConnection conn = new SqlConnection(strcon);
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -258,42 +259,25 @@ namespace A_045
             ddlDname.DataSource = dt;
             ddlDname.DataBind();
             ddlDname.DataTextField = "depa_name";
-         //   ddlDname.DataTextField = "depa_id";
+          //  ddlDname.DataTextField = "depa_id";
             ddlDname.DataBind();
             conn.Close();
 
         }
         protected void ddlDname_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(strcon);
-            conn.Open();
+           
 
-            SqlCommand cmd = new SqlCommand("select * from cou_1 where depa_id=@depa_id", conn);
-
-            cmd.Parameters.AddWithValue("depa_name", ddlDname.SelectedValue);
-
-
-            ddlDname.DataSource = cmd.ExecuteReader();
-            ddlDname.DataTextField = "depa_name";
-            //  ddlDname.DataTextField = "cousre_id";
-            ddlDname.DataBind();
         }
 
         protected void gvdepa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GridViewRow row = gvdepa.SelectedRow;
-            txtCname.Text = row.Cells[2].Text;
-            for (int i = 0; i < ddlDname.Items.Count; i++)
-            {
-                if (ddlDname.Items[i].Text == row.Cells[3].Text)
-                {
-                    ddlDname.SelectedIndex = i;
-                }
-
-            }
+            
         }
 
+        protected void txtCname_TextChanged(object sender, EventArgs e)
+        {
 
-      
+        }
     }
 }

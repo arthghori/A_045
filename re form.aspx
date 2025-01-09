@@ -150,7 +150,7 @@
             </tr>
             <tr>
                 <td class="auto-style8" colspan="2">
-                    Course name: <asp:TextBox ID="txtCname" runat="server"></asp:TextBox>
+                    Course name: <asp:TextBox ID="txtCname" runat="server" OnTextChanged="txtCname_TextChanged"></asp:TextBox>
                     <br />
                     <br />
                     depa name :<br />
