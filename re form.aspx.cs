@@ -28,13 +28,13 @@ namespace A_045
             {
 
                 conn.Open();
-                Response.Write("s");
+                Response.Write("success!");
 
             }
             else
             {
 
-                Response.Write("f");
+                Response.Write("fail!");
             }
 
         }
