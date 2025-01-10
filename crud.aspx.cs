@@ -47,7 +47,28 @@ namespace A_045
         //login mate 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            string email = txtLogin.Text;
+            string pass = txtPass.Text;
+            SqlConnection con = new SqlConnection(strcon);
 
+            con.Open();
+            string query = "select count(*) from login where email=@email and password=@password";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("email", email);
+            cmd.Parameters.AddWithValue ("password", pass);
+            int i = Convert.ToInt16(cmd.ExecuteScalar());
+
+            if (i == 0)
+            {
+                Response.Write("not valid login!");
+
+            }
+            else
+            {
+                Session["a"]=txtLogin.Text;
+                Response.Redirect("re form.aspx");
+            }
         }
     }
 }
