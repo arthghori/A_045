@@ -72,10 +72,18 @@
     <Content Include="App_Data\Electricdb_log.ldf">
       <DependentUpon>Electricdb.mdf</DependentUpon>
     </Content>
+    <Content Include="crud.aspx" />
     <Content Include="re form.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="crud.aspx.cs">
+      <DependentUpon>crud.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="crud.aspx.designer.cs">
+      <DependentUpon>crud.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="re form.aspx.cs">
       <DependentUpon>re form.aspx</DependentUpon>

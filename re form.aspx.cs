@@ -27,13 +27,13 @@ namespace A_045
             {
 
                 conn.Open();
-                Response.Write("succesfull");
+                Response.Write("s");
 
             }
             else
             {
 
-                Response.Write("false");
+                Response.Write("f");
             }
 
         }
@@ -45,6 +45,7 @@ namespace A_045
                 fnBindstate(); 
                 this.Bindgrid();
                 this.Blinddb();
+                this.Blinddb1();
             }
         }
 
@@ -164,39 +165,20 @@ namespace A_045
             fnBindcity();
         }
 
-        protected void gvdepa_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        public void Bindgrid()
-        {
-            SqlConnection conn = new SqlConnection(strcon);
-            string query = "select * from depa_1";
-
-            conn.Open();
-            SqlDataAdapter sda = new SqlDataAdapter(query,conn);
-            DataSet ds = new DataSet();
-            sda.Fill(ds);
-
-            gvdepa.DataSource = ds;
-            gvdepa.DataBind();
-            conn.Close();
-             
-
-        }
-
+      
+        // ddl depa and cou for drop down
         public void Blinddb()
         {
             SqlConnection conn = new SqlConnection (strcon);
             conn.Open ();
-            string query = "select * from depa_1";
+            string query = "select * from cou_1";
             SqlDataAdapter adpt = new SqlDataAdapter(query,conn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
             ddlDep.DataSource = dt;
             ddlDep.DataBind();
-            ddlDep.DataTextField = "depa_name";
+            ddlDep.DataTextField = "course_name";
             ddlDep.DataTextField = "depa_id";
             ddlDep.DataBind();
             conn.Close(); 
@@ -204,8 +186,6 @@ namespace A_045
 
 
         }
-
-
 
 
         protected void ddlDepa_SelectedIndexChanged(object sender, EventArgs e)
@@ -220,13 +200,90 @@ namespace A_045
            
          ddlCour.DataSource = cmd.ExecuteReader();
          ddlCour.DataTextField = "course_name";
-         ddlCour.DataTextField = "cousre_id";
+        //ddlCour.DataTextField = "cousre_id";
          ddlCour.DataBind();
 
         }
 
         protected void ddlCou_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+
+        //grid view mate che main grid view to display depaname and coursename 
+        public void Bindgrid()
+        {
+            SqlConnection conn = new SqlConnection(strcon);
+            string query = "select c.course_name,d.depa_name from cou_1 c, depa_1 d where c.depa_id= d.depa_id";
+
+            conn.Open();
+            SqlDataAdapter sda = new SqlDataAdapter(query, conn);
+            DataSet ds = new DataSet();
+            sda.Fill(ds);
+
+            gvdepa.DataSource = ds;
+            gvdepa.DataBind();
+            conn.Close();
+
+
+        }
+
+        //insert mate je dropdown che te mate 
+
+        public void Blinddb1()
+        {
+            SqlConnection conn = new SqlConnection(strcon);
+            conn.Open();
+            string query = "select * from depa_1";
+            SqlDataAdapter adpt = new SqlDataAdapter(query, conn);
+            DataTable dt = new DataTable();
+            adpt.Fill(dt);
+            ddlDname.DataSource = dt;
+            ddlDname.DataBind();
+            ddlDname.DataTextField = "depa_name";
+            ddlDname.DataValueField = "depa_id";
+            ddlDname.DataBind();
+            conn.Close();
+
+        }
+        // insert mate 
+        protected void btnInsert_Click(object sender, EventArgs e)
+        {
+            string c_name = txtCname.Text;
+            string c_depa = ddlDname.SelectedValue.ToString() ;
+           
+            string query = "insert into cou_1 values(@course_name,@depa_name)";
+
+            fnconnctions();
+            SqlCommand cmd = new SqlCommand(query,conn);
+            cmd.Parameters.AddWithValue("@course_name",c_name);
+            cmd.Parameters.AddWithValue("@depa_name", c_depa);
+
+
+
+
+            fnconnctions();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            Bindgrid();
+            
+        }
+
+      
+        protected void ddlDname_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        protected void gvdepa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void txtCname_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
