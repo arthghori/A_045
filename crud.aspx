@@ -19,7 +19,7 @@
         <p>
             &nbsp;</p>
         <p>
-            <asp:Button ID="btnLogin" runat="server" Text="login" />
+            <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="login" />
             <asp:Button ID="btnReset" runat="server" Text="reset" />
         </p>
     </form>
