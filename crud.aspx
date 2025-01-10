@@ -14,7 +14,7 @@
         <asp:TextBox ID="txtLogin" runat="server"></asp:TextBox>
         <p>
             PASSWORD:
-            <asp:TextBox ID="txtPass" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtPass" runat="server" TextMode="Password"></asp:TextBox>
         </p>
         <p>
             &nbsp;</p>
