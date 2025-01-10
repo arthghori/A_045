@@ -52,7 +52,7 @@ namespace A_045
             SqlConnection con = new SqlConnection(strcon);
 
             con.Open();
-            string query = "select count(*) from login where email=@email and password=@password";
+            string query = "select count(*) from login_1 where email=@email and password=@password";
 
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("email", email);
