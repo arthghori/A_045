@@ -43,8 +43,11 @@ namespace A_045
             fnconnctions();
             if (!Page.IsPostBack)
             {
+
                 Response.Write(Session["a"]);
                 fnBindstate(); 
+                fnBindstate();
+
                 this.Bindgrid();
                 this.Blinddb();
                 this.Blinddb1();
