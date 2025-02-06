@@ -8,8 +8,20 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
+        LOGIN PAGE<br />
+        <br />
+        USER NAME:
+        <asp:TextBox ID="txtLogin" runat="server"></asp:TextBox>
+        <p>
+            PASSWORD:
+            <asp:TextBox ID="txtPass" runat="server" TextMode="Password"></asp:TextBox>
+        </p>
+        <p>
+            &nbsp;</p>
+        <p>
+            <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="login" />
+            <asp:Button ID="btnReset" runat="server" Text="reset" />
+        </p>
     </form>
 </body>
 </html>

@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
+using System.Xml.Linq;
 
 
 namespace A_045
@@ -27,13 +28,13 @@ namespace A_045
             {
 
                 conn.Open();
-                Response.Write("s");
+                Response.Write("success!");
 
             }
             else
             {
 
-                Response.Write("f");
+                Response.Write("fail!");
             }
 
         }
@@ -42,7 +43,11 @@ namespace A_045
             fnconnctions();
             if (!Page.IsPostBack)
             {
+
+                Response.Write(Session["a"]);
                 fnBindstate(); 
+                fnBindstate();
+
                 this.Bindgrid();
                 this.Blinddb();
                 this.Blinddb1();
@@ -253,7 +258,7 @@ namespace A_045
             string c_depa = ddlDname.SelectedValue.ToString() ;
            
             string query = "insert into cou_1 values(@course_name,@depa_name)";
-
+             
             fnconnctions();
             SqlCommand cmd = new SqlCommand(query,conn);
             cmd.Parameters.AddWithValue("@course_name",c_name);
@@ -276,14 +281,70 @@ namespace A_045
 
         }
 
+        //update mate 
         protected void gvdepa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            GridViewRow row = gvdepa.SelectedRow;
+
+            // Set TextBox value
+            txtCname.Text = row.Cells[1].Text;
+
+            // Set DropDownList value (only if it matches an item)
+            try
+            {
+                ddlDname.SelectedValue = row.Cells[2].Text;
+            }
+            catch
+            {
+                ddlDname.ClearSelection(); // Clear selection if no match
+            }
+
         }
 
         protected void txtCname_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        //delete mate button 
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            GridViewRow row = gvdepa.SelectedRow;
+            int cousre_id = Convert.ToInt32(row.Cells[1].Text);
+            string query = "Delete from cou_1 where cousre_id=@cousre_id";
+            SqlConnection conn = new SqlConnection(strcon);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@cousre_id", cousre_id);
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            Bindgrid();
+        }
+
+        //row delete karva mate
+        protected void gvdepa_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            GridViewRow row = gvdepa.Rows[e.RowIndex];
+            int cousre_id = Convert.ToInt32(row.Cells[1].Text);
+            string query = "Delete from depa_1 where cousre_id=@cousre_id";
+            SqlConnection conn = new SqlConnection(strcon);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@cousre_id", cousre_id);
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            Bindgrid();
+        }
+
+        protected void gvdepa_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        {
+
+        }
+
+        protected void btnre_Click(object sender, EventArgs e)
+        {
+            txtCname.Text = " ";
+            ddlDname.ClearSelection();
         }
     }
 }
