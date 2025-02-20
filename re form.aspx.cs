@@ -120,7 +120,7 @@ namespace A_045
 
             ddlCity1.Items.Insert(0, new ListItem("---Select city---"));
 
-           
+
             if (ddlstate.SelectedValue == "gujarat")
             {
                 ddlCity1.Items.Add("Surat");
@@ -185,8 +185,6 @@ namespace A_045
             ddlDep.DataBind();
             conn.Close(); 
 
-
-
         }
 
 
@@ -202,7 +200,7 @@ namespace A_045
            
          ddlCour.DataSource = cmd.ExecuteReader();
          ddlCour.DataTextField = "course_name";
-        //ddlCour.DataTextField = "cousre_id";
+         ddlCour.DataValueField = "cousre_id";
          ddlCour.DataBind();
 
         }
@@ -213,20 +211,34 @@ namespace A_045
 
 
         //grid view mate che main grid view to display depaname and coursename 
+        //public void Bindgrid()
+        //{
+        //    SqlConnection conn = new SqlConnection(strcon);
+        //    string query = "select c.course_name,d.depa_name from cou_1 c, depa_1 d where c.depa_id= d.depa_id";
+
+        //    conn.Open();
+        //    SqlDataAdapter sda = new SqlDataAdapter(query, conn);
+        //    DataSet ds = new DataSet();
+        //    sda.Fill(ds);
+
+        //    gvdepa.DataSource = ds;
+        //    gvdepa.DataBind();
+        //    conn.Close();
+
+
+        //}
+
         public void Bindgrid()
         {
             SqlConnection conn = new SqlConnection(strcon);
-            string query = "select c.course_name,d.depa_name from cou_1 c, depa_1 d where c.depa_id= d.depa_id";
-
+            string query = "select * from cou_1";
             conn.Open();
             SqlDataAdapter sda = new SqlDataAdapter(query, conn);
             DataSet ds = new DataSet();
             sda.Fill(ds);
-
             gvdepa.DataSource = ds;
             gvdepa.DataBind();
             conn.Close();
-
 
         }
 
@@ -260,10 +272,6 @@ namespace A_045
             SqlCommand cmd = new SqlCommand(query,conn);
             cmd.Parameters.AddWithValue("@course_name",c_name);
             cmd.Parameters.AddWithValue("@depa_name", c_depa);
-
-
-
-
             fnconnctions();
             cmd.ExecuteNonQuery();
             conn.Close();
@@ -282,19 +290,10 @@ namespace A_045
         protected void gvdepa_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = gvdepa.SelectedRow;
-
-            // Set TextBox value
-            txtCname.Text = row.Cells[1].Text;
-
-            // Set DropDownList value (only if it matches an item)
-            try
-            {
-                ddlDname.SelectedValue = row.Cells[2].Text;
-            }
-            catch
-            {
-                ddlDname.ClearSelection(); // Clear selection if no match
-            }
+            
+             txtCname.Text = row.Cells[1].Text;
+             ddlDname.Text = row.Cells[2].Text;
+                      
 
         }
 
@@ -304,7 +303,8 @@ namespace A_045
         }
 
         //delete mate button 
-        protected void btnDelete_Click(object sender, EventArgs e)
+       
+        protected void btnDelete_Click1(object sender, EventArgs e)
         {
             GridViewRow row = gvdepa.SelectedRow;
             int cousre_id = Convert.ToInt32(row.Cells[1].Text);
@@ -317,7 +317,6 @@ namespace A_045
             conn.Close();
             Bindgrid();
         }
-
         //row delete karva mate
         protected void gvdepa_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -342,6 +341,11 @@ namespace A_045
         {
             txtCname.Text = " ";
             ddlDname.ClearSelection();
+        }
+
+        protected void ddlCity1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

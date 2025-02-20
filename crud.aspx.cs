@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,65 +10,63 @@ using System.Web.UI.WebControls;
 
 namespace A_045
 {
-    public partial class crud : System.Web.UI.Page
+    public partial class loginpage : System.Web.UI.Page
     {
+        string strcon = ConfigurationManager.ConnectionStrings["dbElectronics"].ConnectionString;
         SqlConnection conn;
-        string strcon;
-        protected void fnconnctions()
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Fnconn();
+
+        }
+
+
+        protected void Fnconn()
         {
 
-            strcon = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-
+            strcon = ConfigurationManager.ConnectionStrings["dbElectronics"].ConnectionString;
             conn = new SqlConnection(strcon);
 
             if (conn.State != ConnectionState.Open)
             {
-
                 conn.Open();
-                Response.Write("success!");
+                Response.Write("yessss....");
+
 
             }
             else
             {
+                Response.Write("fail....");
 
-                Response.Write("fail!");
             }
+
         }
 
-        protected void Page_Load(object sender, EventArgs e)
+
+
+        protected void btnlogin_Click(object sender, EventArgs e)
         {
-            fnconnctions();
-            if (!Page.IsPostBack)
-            {
-               
-            }
-        }
+            string username = txtemail.Text;
+            string password = txtpass.Text;
+            Session["username"] = txtemail.Text;
+            SqlConnection conn = new SqlConnection(strcon);
 
-        //login mate 
-        protected void btnLogin_Click(object sender, EventArgs e)
-        {
-            string email = txtLogin.Text;
-            string pass = txtPass.Text;
-            SqlConnection con = new SqlConnection(strcon);
-
-            con.Open();
-            string query = "select count(*) from login_1 where email=@email and password=@password";
-
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("email", email);
-            cmd.Parameters.AddWithValue ("password", pass);
-            int i = Convert.ToInt16(cmd.ExecuteScalar());
-
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("select count(*) from tblCustomer where Email=@Email and Password=@Password", conn);
+            cmd.Parameters.AddWithValue("Email", username);
+            cmd.Parameters.AddWithValue("password", password);
+            int i = Convert.ToInt32(cmd.ExecuteScalar());
             if (i == 0)
             {
-                Response.Write("not valid login!");
-
+                Response.Write("Login not valid");
             }
             else
             {
-                Session["a"]=txtLogin.Text;
-                Response.Redirect("re form.aspx");
+                Response.Redirect("search.aspx");
             }
+            conn.Close();
         }
     }
 }
+

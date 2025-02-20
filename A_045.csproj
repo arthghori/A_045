@@ -73,6 +73,8 @@
       <DependentUpon>Electricdb.mdf</DependentUpon>
     </Content>
     <Content Include="crud.aspx" />
+    <Content Include="drop.aspx" />
+    <Content Include="hi.aspx" />
     <Content Include="re form.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -83,6 +85,20 @@
     </Compile>
     <Compile Include="crud.aspx.designer.cs">
       <DependentUpon>crud.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="drop.aspx.cs">
+      <DependentUpon>drop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="drop.aspx.designer.cs">
+      <DependentUpon>drop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="hi.aspx.cs">
+      <DependentUpon>hi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="hi.aspx.designer.cs">
+      <DependentUpon>hi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="re form.aspx.cs">

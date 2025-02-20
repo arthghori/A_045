@@ -115,7 +115,7 @@
                 <td class="auto-style5">
                     <asp:DropDownList ID="ddlstate" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlstate_SelectedIndexChanged" Width="183px">
                     </asp:DropDownList>
-                    <asp:DropDownList ID="ddlCity1" runat="server" Width="180px">
+                    <asp:DropDownList ID="ddlCity1" runat="server" Width="180px" OnSelectedIndexChanged="ddlCity1_SelectedIndexChanged">
                         <asp:ListItem Value=" ">--Select City--</asp:ListItem>
                     </asp:DropDownList>
                 </td>
@@ -167,7 +167,7 @@
                 <td class="auto-style8" colspan="2">
                     <asp:Button ID="btnInsert" runat="server" OnClick="btnInsert_Click" Text="Insert" Width="126px" Height="42px" />
                     <asp:Button ID="btnre" runat="server" Height="32px"  Text="Reset" Width="126px" />
-                    <asp:Button ID="btnDelete" runat="server" Height="42px"  Text="Delete" Width="126px" />
+                    <asp:Button ID="btnDelete" runat="server" Height="42px"  Text="Delete" Width="126px" OnClick="btnDelete_Click1" />
                 </td>
             </tr>
         </table>
